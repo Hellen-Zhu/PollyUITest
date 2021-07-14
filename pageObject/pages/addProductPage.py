@@ -2,9 +2,10 @@
 
 """添加商品页面"""
 
-from pages.basePage import BasePage
+from pageObject.pages.basePage import BasePage
 # from publicLib.public import ran_str
 from selenium.webdriver.common.by import By
+from pageObject.object.addProductPageObject import AddProdPageObject
 import time
 
 
@@ -14,75 +15,76 @@ class AddProductPage(BasePage):
         super().__init__(driver)  # 执行父类的构造方法
         self.url = "http://120.55.190.222:38090/#/pms/addProduct"
 
-    productCategoryLabel = (By.CSS_SELECTOR, "form > div:nth-child(1) .el-cascader__label")
-    categoryListSelector = (By.CSS_SELECTOR, "ul.el-cascader-menu > li:nth-child(%s)")
-    categoryOptionSelector = (By.CSS_SELECTOR, "ul + ul.el-cascader-menu > li:nth-child(%s)")
-    productNameLabel = (By.CSS_SELECTOR, "label[for=\"name\"] + div input")
-    productSubTitleLabel = (By.CSS_SELECTOR, "label[for=\"subTitle\"] + div input")
-    productBrandIdLabel = (By.CSS_SELECTOR, "label[for=\"brandId\"] + div input")
-    productBrandIdDropDownList = (By.CSS_SELECTOR, "body > div:nth-child(8) ul > li:nth-child(%s)")
-    heraldProductFlag = (By.XPATH, "//*[text()=\"预告商品：\"]/..//span")
-    nextStepForDiscount = (By.XPATH, "//*[text()=\"下一步，填写商品促销\"]")
-    nextStepForProductAttribute = (By.XPATH, "//*[text()=\"下一步，填写商品属性\"]")
-    nextStepForRelatedProduct = (By.XPATH, "//*[text()=\"下一步，选择商品关联\"]")
-    nextStepForSubmitProduct = (By.XPATH, "//*[text()=\"完成，提交商品\"]")
-    confirmSubmitButton = (
-        By.CSS_SELECTOR, "[class=\"el-button el-button--default el-button--small el-button--primary \"]")
+    # productCategoryLabel = (By.CSS_SELECTOR, "form > div:nth-child(1) .el-cascader__label")
+    # categoryListSelector = (By.CSS_SELECTOR, "ul.el-cascader-menu > li:nth-child(%s)")
+    # categoryOptionSelector = (By.CSS_SELECTOR, "ul + ul.el-cascader-menu > li:nth-child(%s)")
+    # productNameLabel = (By.CSS_SELECTOR, "label[for=\"name\"] + div input")
+    # productSubTitleLabel = (By.CSS_SELECTOR, "label[for=\"subTitle\"] + div input")
+    # productBrandIdLabel = (By.CSS_SELECTOR, "label[for=\"brandId\"] + div input")
+    # productBrandIdDropDownList = (By.CSS_SELECTOR, "body > div:nth-child(8) ul > li:nth-child(%s)")
+    # heraldProductFlag = (By.XPATH, "//*[text()=\"预告商品：\"]/..//span")
+    # nextStepForDiscount = (By.XPATH, "//*[text()=\"下一步，填写商品促销\"]")
+    # nextStepForProductAttribute = (By.XPATH, "//*[text()=\"下一步，填写商品属性\"]")
+    # nextStepForRelatedProduct = (By.XPATH, "//*[text()=\"下一步，选择商品关联\"]")
+    # nextStepForSubmitProduct = (By.XPATH, "//*[text()=\"完成，提交商品\"]")
+    # confirmSubmitButton = (
+    #     By.CSS_SELECTOR, "[class=\"el-button el-button--default el-button--small el-button--primary \"]")el-button--primary
 
     def product_classification_select_box(self):
         """商品分类下拉框, 外框"""
-        return self.get_locator(self.productCategoryLabel)
+        return self.get_locator((By.CSS_SELECTOR, AddProdPageObject.productCategoryLabel))
 
     def product_classification_select_box_idx1(self, idx1):
         """商品分类下拉框, 一级分类"""
-        category_list_selector = (self.categoryListSelector[0], self.categoryListSelector[1] % idx1)
-        return self.get_locator(category_list_selector)
+        # category_list_selector = (self.categoryListSelector[0], self.categoryListSelector[1] % idx1)
+        # category_list_selector = Locator.categoryListSelector % idx1
+        return self.get_locator((By.CSS_SELECTOR, AddProdPageObject.categoryListSelector % idx1))
 
     def product_classification_select_box_idx2(self, idx2):
         """商品分类下拉框, 二级分类"""
-        category_option_selector = (self.categoryOptionSelector[0], self.categoryOptionSelector[1] % idx2)
-        return self.get_locator(category_option_selector)
+        # category_option_selector = (self.categoryOptionSelector[0], self.categoryOptionSelector[1] % idx2)
+        return self.get_locator((By.CSS_SELECTOR,AddProdPageObject.categoryOptionSelector % idx2))
 
     def product_name_input_box(self):
         """商品名称输入框"""
-        return self.get_locator(self.productNameLabel)
+        return self.get_locator((By.CSS_SELECTOR,AddProdPageObject.productNameLabel))
 
     def product_subtitle_input_box(self):
         """副标题输入框"""
-        return self.get_locator(self.productSubTitleLabel)
+        return self.get_locator((By.CSS_SELECTOR,AddProdPageObject.productSubTitleLabel))
 
     def product_brand_select_box(self):
         """商品品牌下拉框外框"""
-        return self.get_locator(self.productBrandIdLabel)
+        return self.get_locator((By.CSS_SELECTOR,AddProdPageObject.productBrandIdLabel))
 
     def product_brand_select_box_option(self, idx):
         """商品品牌下拉框, 一级分类"""
-        product_brand_id_drop_down_list = (self.productBrandIdDropDownList[0], self.productBrandIdDropDownList[1] % idx)
-        return self.get_locator(product_brand_id_drop_down_list)
+        # product_brand_id_drop_down_list = (self.productBrandIdDropDownList[0], self.productBrandIdDropDownList[1] % idx)
+        return self.get_locator((By.CSS_SELECTOR,AddProdPageObject.productBrandIdDropDownList % idx))
 
     def next_step_commodity_promotion_button_box(self):
         """下一步, 填写商品促销按钮"""
-        return self.get_locator(self.nextStepForDiscount)
+        return self.get_locator((By.XPATH,AddProdPageObject.nextStepForDiscount))
 
     def is_herald_box(self):
         """预告商品开关"""
-        return self.get_locator(self.heraldProductFlag)
+        return self.get_locator((By.XPATH,AddProdPageObject.heraldProductFlag))
 
     def next_step_product_attribute_button_box(self):
         """下一步, 填写商品属性按钮"""
-        return self.get_locator(self.nextStepForProductAttribute)
+        return self.get_locator((By.XPATH,AddProdPageObject.nextStepForProductAttribute))
 
     def next_step_choose_product_related_button_box(self):
         """下一步, 选择商品关联按钮"""
-        return self.get_locator(self.nextStepForRelatedProduct)
+        return self.get_locator((By.XPATH,AddProdPageObject.nextStepForRelatedProduct))
 
     def submit_product_button_box(self):
         """完成, 提交商品按钮"""
-        return self.get_locator(self.nextStepForSubmitProduct)
+        return self.get_locator((By.XPATH,AddProdPageObject.nextStepForSubmitProduct))
 
     def confirm_submission_box(self):
         """确认提交按钮"""
-        return self.get_locator(self.confirmSubmitButton)
+        return self.get_locator((By.CSS_SELECTOR, AddProdPageObject.confirmSubmitButton))
 
 
 class AddProductPageAction(AddProductPage):

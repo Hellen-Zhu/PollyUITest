@@ -1,6 +1,6 @@
 # productListPage
 # 2021/7/13
-from pages.basePage import BasePage
+from pageObject.pages.basePage import BasePage
 from selenium.webdriver.common.by import By
 
 

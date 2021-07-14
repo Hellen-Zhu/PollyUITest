@@ -45,4 +45,5 @@ class BasePage:
     #     time.sleep(time)
 
     def quit(self):
+        self.driver.close()
         self.driver.quit()
